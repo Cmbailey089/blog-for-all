@@ -1,0 +1,17 @@
+[
+    {
+      "name": "Thor",
+      "email": "thor@odenson.com",
+      "password": "hammer"
+    },
+    {
+      "name": "Loki",
+      "email": "trickyelf@iceplanet.com",
+      "password": "IluvMyself"
+    },
+    {
+      "name": "Val",
+      "email": "valkyrie@asgard.com",
+      "password": "brunnhilde"
+    }
+  ]
