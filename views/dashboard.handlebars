@@ -11,7 +11,7 @@
     <form class="form new-project-form">
       <div class="form-group">
         <label for="project-name">Title:</label>
-        <input class="form-input" type="text" id="project-name" name="project-name" />
+        <input class="form-input" type="text" id="project-title" name="project-name" />
       </div>
       <div class="form-group">
         <label for="project-desc">Comment:</label>
@@ -30,10 +30,11 @@
     {{#each comments as |comment|}}
     <div class="row mb-2">
       <div class="col-md-8">
-        <h4><a href="/project/{{comment.id}}">{{comment.title}}{{format_date posted}}</a></h4>
+        <h4><a href="/project/{{comment.id}}">{{comment.title}}  {{format_date posted}}</a></h4>
         <h5><a href="/project/{{comment.id}}">{{comment.comment}}</a></h5>
       </div>
       <div class="col-md-4">
+        <button class="btn"  href="/update"data-id="{{comment.id}}">Update Comment</button>
         <button class="btn btn-sm btn-danger" data-id="{{comment.id}}">DELETE</button>
       </div>
     </div>
