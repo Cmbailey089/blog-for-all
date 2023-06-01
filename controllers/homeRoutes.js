@@ -4,7 +4,7 @@ const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
   try {
-    const projectData = await Comment.findAll({
+    const commentsData = await Comment.findAll({
       include: [
         {
           model: User,
@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
       ],
     });
 
-    const comments = projectData.map((project) => project.get({ plain: true }));
+    const comments = commentsData.map((comment) => comment.get({ plain: true }));
 
     res.render('home', { 
       comments, 
@@ -26,7 +26,7 @@ router.get('/', async (req, res) => {
 
 router.get('/comments/:id', async (req, res) => {
   try {
-    const projectData = await Comment.findByPk(req.params.id, {
+    const commentsData = await Comment.findByPk(req.params.id, {
       include: [
         {
           model: User,
@@ -35,10 +35,10 @@ router.get('/comments/:id', async (req, res) => {
       ],
     });
 
-    const project = projectData.get({ plain: true });
+    const comment = commentsData.get({ plain: true });
 
-    res.render('project', {
-      ...project,
+    res.render('comments', {
+      ...comment,
       logged_in: req.session.logged_in
     });
   } catch (err) {

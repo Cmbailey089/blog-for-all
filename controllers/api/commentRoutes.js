@@ -4,32 +4,50 @@ const withAuth = require('../../utils/auth');
 
 router.post('/', withAuth, async (req, res) => {
   try {
-    const newProject = await Comment.create({
+    const newComment = await Comment.create({
       ...req.body,
       user_id: req.session.user_id,
     });
 
-    res.status(200).json(newProject);
+    res.status(200).json(newComment);
   } catch (err) {
     res.status(400).json(err);
   }
 });
 
+router.put('/:id', (req, res) => {
+  Comment.update(
+    {
+      title: req.body.title,
+      comment: req.body.comment,
+    },
+    {
+      where: {
+        id: req.params.id,
+      },
+    }
+  )
+    .then((updatedComment) => {
+      res.json(updatedComment);
+    })
+    .catch((err) => res.json(err));
+});
+
 router.delete('/:id', withAuth, async (req, res) => {
   try {
-    const projectData = await Comment.destroy({
+    const commentData = await Comment.destroy({
       where: {
         id: req.params.id,
         user_id: req.session.user_id,
       },
     });
 
-    if (!projectData) {
-      res.status(404).json({ message: 'No project found with this id!' });
+    if (!commentData) {
+      res.status(404).json({ message: 'No comment found with this id!' });
       return;
     }
 
-    res.status(200).json(projectData);
+    res.status(200).json(commentData);
   } catch (err) {
     res.status(500).json(err);
   }
