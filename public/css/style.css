@@ -22,6 +22,10 @@ body {
     display: block;
   }
 
+  .row {
+    border:1px;
+  }
+
   a {
     background-color: transparent;
   }
